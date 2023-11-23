@@ -1,17 +1,20 @@
-# Mazona
+# 🎮 Mazona
 # Introduction
-
+This repository houses the source code for an exciting maze game project. Embark on a journey through intricately designed mazes, overcome challenges, and reach the elusive exit. Whether you're a game development enthusiast, a programmer honing your skills, or simply someone who loves a good maze challenge, this project is for you!
 # Installation
 
 * using MAC install the followin software.
-* brew install SDL2
-* brew install SDL2_image
-* brew install SDL2_ttf
-
+```
+brew install SDL2
+brew install SDL2_image
+brew install SDL2_ttf
+```
 * LINUX/UBUNTU
-* sudo apt install SDL2
-* sudo apt install SDL2_image
-* sudo apt install SDL2_ttf
+```
+sudo apt install SDL2
+sudo apt install SDL2_image
+sudo apt install SDL2_ttf
+```
 
 * Windows
 * Follow this link for installation details https://lazyfoo.net/tutorials/SDL/01_hello_SDL/windows/index.php
