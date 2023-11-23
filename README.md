@@ -17,9 +17,9 @@ sudo apt install SDL2_ttf
 ```
 
 * Windows
-* Follow this link for installation details https://lazyfoo.net/tutorials/SDL/01_hello_SDL/windows/index.php
+ Follow this link for installation details ```https://lazyfoo.net/tutorials/SDL/01_hello_SDL/windows/index.php```
 * THEN
-* ```git clone https://github.com/reddeath1/Mazona.git```
+ ```git clone https://github.com/reddeath1/Mazona.git```
 * 
 # Usage
 * Execute ```./maze``` or type ```make run``` to open the game
