@@ -1,5 +1,5 @@
-#ifndef _MAZONA_
-#define _MAZONA_
+#ifndef _HEADER_
+#define _HEADER_
 
 #include <SDL2/SDL.h>
 #include <stdio.h>
@@ -22,38 +22,13 @@
 #define TEXTURE_WIDTH 64
 #define TEXTURE_HEIGHT 64
 #define ANGLE (60 * (PI / 180))
-#define _RAYS WIN_WIDTH
+#define RAYS WIN_WIDTH
 #define FPS 30
 #define FRAME_TIME_LENGTH (1000 / FPS)
 
 #define MINIMAP_SCALE_FACTOR 0.20
 
-/* Declaration of Global Variables */
-
-const int map[MAP_ROWS][MAP_COLS] = {
-    {7, 7, 7, 7, 7, 7, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8},
-    {7, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 8},
-    {7, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 8, 8, 8, 0, 1, 0, 8},
-    {7, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 8, 0, 0, 0, 1, 0, 8},
-    {7, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 8, 0, 1, 1, 1, 0, 8},
-    {2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0, 1, 0, 0, 0, 8},
-    {2, 2, 2, 2, 2, 0, 1, 0, 8, 8, 8, 8, 8, 0, 1, 0, 7, 7, 7},
-    {2, 0, 0, 0, 2, 0, 1, 0, 8, 0, 0, 0, 0, 0, 1, 0, 7, 0, 7},
-    {2, 0, 2, 0, 2, 1, 1, 0, 8, 0, 8, 8, 8, 8, 8, 0, 7, 0, 7},
-    {2, 0, 2, 0, 2, 0, 0, 0, 8, 0, 0, 0, 0, 0, 8, 0, 7, 0, 7},
-    {2, 0, 2, 0, 2, 0, 1, 0, 8, 8, 8, 8, 8, 0, 8, 0, 7, 0, 7},
-    {2, 0, 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 8, 0, 7, 0, 7},
-	{2, 0, 2, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 8, 0, 7, 0, 7},
-	{2, 0, 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 7, 0, 7},
-	{2, 0, 2, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 7, 0, 7},
-	{2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7},
-	{2, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 7},
-	{2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7},
-	{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
-};
-
 extern const int map[MAP_ROWS][MAP_COLS];
-
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 extern int isRunning;
@@ -89,24 +64,32 @@ struct Ray {
     int isRayFacingLeft;
     int isRayFacingRight;
     int wallHitContent;
-} rays[_RAYS];
+} rays[RAYS];
 
-extern struct Ray rays[_RAYS];
+extern struct Ray rays[RAYS];
 extern int ticksLastFrame;
 extern Uint32 *colorBuffer;
-extern SDL_Texture *colorBufferTexture;
+extern SDL_Texture *colorTexture;
 extern Uint32 *wallTexture;
 extern Uint32 *textures[TEXTURES_NUM];
 
-/* methods */
-
-int init(SDL_Instance *);
 void render(SDL_Instance instance);
-void displayRays(SDL_Instance instance);
+void close(SDL_Instance instance);
+int init(SDL_Instance *);
+void Projection(void);
 void displayMap(SDL_Instance instance);
-void castRays(float rayAngle, int counter);
+void playerConfig(SDL_Instance instance);
+void displayPlayer(SDL_Instance instance);
+void displayRays(SDL_Instance instance);
+void displayAllRays(void);
+void clearColorBuffer(Uint32 color);
+void castRay(float rayAngle, int counter);
 int collisionDetect(float x, float y);
 float distanceBetweenPoints(float x1, float y1, float x2, float y2);
-void displayPlayer(SDL_Instance instance);
+void displayColorBuffer(SDL_Instance instance);
+int events(void);
+void update(void);
+void move(float deltaTime);
+int mapWall(float x, float y);
 
-#endif /* _MAZONA_ */
+#endif /* _HEADER_ */

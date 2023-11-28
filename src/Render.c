@@ -31,7 +31,7 @@ float distanceBetweenPoints(float x1, float y1, float x2, float y2)
  * @rayAngle: the ray angle
  * @counter: counter
  */
-void castRays(float rayAngle, int counter)
+void castRay(float rayAngle, int counter)
 {
 	rayAngle = normalizeAngle(rayAngle);
 
@@ -73,7 +73,7 @@ void castRays(float rayAngle, int counter)
         float xToCheck = nextHorzTouchX;
         float yToCheck = nextHorzTouchY + (isRayFacingUp ? -1 : 0);
 
-        if (collisionDetect(xToCheck, yToCheck)) {
+        if (mapWall(xToCheck, yToCheck)) {
             /* found a wall hit */
             horzWallHitX = nextHorzTouchX;
             horzWallHitY = nextHorzTouchY;
@@ -117,7 +117,7 @@ void castRays(float rayAngle, int counter)
         float xToCheck = nextVertTouchX + (isRayFacingLeft ? -1 : 0);
         float yToCheck = nextVertTouchY;
 
-        if (collisionDetect(xToCheck, yToCheck)) {
+        if (mapWall(xToCheck, yToCheck)) {
             /* found a wall hit */
             vertWallHitX = nextVertTouchX;
             vertWallHitY = nextVertTouchY;
@@ -167,7 +167,7 @@ void displayRays(SDL_Instance instance)
 	int i;
 
 	SDL_SetRenderDrawColor(instance.renderer, 255, 0, 0, 255);
-    for (i = 0; i < _RAYS; i++)
+    for (i = 0; i < RAYS; i++)
 	{
         SDL_RenderDrawLine(
             instance.renderer,
@@ -189,39 +189,10 @@ void displayAllRays(void)
 
 	rayAngle = p.rotationAngle - (ANGLE / 2);
 
-	for (strip = 0; strip < _RAYS; strip++)
+	for (strip = 0; strip < RAYS; strip++)
 	{
-		castRays(rayAngle, strip);
-		rayAngle += ANGLE / _RAYS;
-	}
-}
-
-/**
-* displayMap - display the map
-* @instance: sdl instance
-*/
-void displayMap(SDL_Instance instance)
-{
-	int i, j;
-	int tileX, tileY, tileColor;
-
-	for (i = 0; i < MAP_ROWS; i++)
-	{
-		for (j = 0; j < MAP_COLS; j++)
-		{
-			tileX = j * TILE_SIZE;
-			tileY = i * TILE_SIZE;
-			tileColor = map[i][j] != 0 ? 255 : 0;
-
-			SDL_SetRenderDrawColor(instance.renderer, tileColor, tileColor, tileColor, 255);
-			SDL_Rect mapTileRect = {
-				tileX * MINIMAP_SCALE_FACTOR,
-				tileY * MINIMAP_SCALE_FACTOR,
-				TILE_SIZE * MINIMAP_SCALE_FACTOR,
-				TILE_SIZE * MINIMAP_SCALE_FACTOR
-			};
-			SDL_RenderFillRect(instance.renderer, &mapTileRect);
-		}
+		castRay(rayAngle, strip);
+		rayAngle += ANGLE / RAYS;
 	}
 }
 
@@ -262,4 +233,34 @@ int init(SDL_Instance *instance)
 		return (1);
 	}
 	return (0);
+}
+
+/**
+ * clearColorBuffer - clear the color buffer
+ * @color: the color
+ * Return: nothing
+ */
+void clearColorBuffer(Uint32 color)
+{
+    for (int x = 0; x < WIN_WIDTH; x++)
+    {
+        for (int y = 0; y < WIN_HEIGHT; y++)
+            colorBuffer[(WIN_WIDTH * y) + x] = color;
+    }
+}
+
+/**
+ * displayColorBuffer - display the color buffer
+ * Return: nothing
+ */
+void displayColorBuffer(SDL_Instance instance)
+{
+    SDL_UpdateTexture(
+        colorTexture,
+        NULL,
+        colorBuffer,
+        (int)((Uint32)WIN_WIDTH * sizeof(Uint32))
+    );
+
+    SDL_RenderCopy(instance.renderer, colorTexture, NULL, NULL);
 }

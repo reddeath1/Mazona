@@ -1,4 +1,5 @@
 #include "../headers/headers.h"
+#include "../headers/textures.h"
 
 /**
  * collisionDetect - detects wall collision
@@ -41,4 +42,86 @@ void displayPlayer(SDL_Instance instance)
         MINIMAP_SCALE_FACTOR * (p.x + cos(p.rotationAngle) * 40),
         MINIMAP_SCALE_FACTOR * (p.y + sin(p.rotationAngle) * 40)
     );
+}
+
+/**
+ * Player - sets characteristics of player
+ * Return: Nothing
+ */
+void playerConfig(SDL_Instance instance)
+{
+    p.x = WIN_WIDTH / 2;
+    p.y = WIN_HEIGHT / 2;
+    p.width = 10;
+    p.height = 10;
+    p.turnDirection = 0;
+    p.walkDirection = 0;
+    p.rotationAngle = PI / 2;
+    p.walkSpeed = 100;
+    p.turnSpeed = 45 * (PI / 180);
+
+    /* Allocating the total amount of bytes in memory to hold the colorbuffer */
+    colorBuffer = (Uint32*) malloc(sizeof(Uint32) * (Uint32)WIN_WIDTH * (Uint32)WIN_HEIGHT);
+
+    /* Creating an SDL_Texture to display the colorbuffer */
+    colorTexture = SDL_CreateTexture(
+        instance.renderer,
+        SDL_PIXELFORMAT_ARGB8888,
+        SDL_TEXTUREACCESS_STREAMING,
+        WIN_WIDTH,
+        WIN_HEIGHT
+    );
+
+    /* loading textures from the textures.h */
+    textures[0] = (Uint32 *) WOOD_TEXTURE; //REDBRICK_TEXTURE;
+    textures[1] = (Uint32 *) WOOD_TEXTURE;//PURPLESTONE_TEXTURE;
+    textures[2] = (Uint32 *) MOSSYSTONE_TEXTURE;
+    textures[3] = (Uint32 *) GRAYSTONE_TEXTURE;
+    textures[4] = (Uint32 *) WOOD_TEXTURE;//COLORSTONE_TEXTURE;
+    textures[5] = (Uint32 *) BLUESTONE_TEXTURE;
+    textures[6] = (Uint32 *) WOOD_TEXTURE;
+    textures[7] = (Uint32 *) EAGLE_TEXTURE;
+}
+
+/**
+ * update - updating the game movements
+ * Return: nothing
+ */
+void update(void)
+{
+    float deltaTime;
+
+    while (
+        !SDL_TICKS_PASSED(SDL_GetTicks(),
+        ticksLastFrame + FRAME_TIME_LENGTH)
+    );
+
+    deltaTime = (SDL_GetTicks() - ticksLastFrame) / 1000.0f;
+    ticksLastFrame = SDL_GetTicks();
+    move(deltaTime);
+    displayAllRays();
+}
+
+/**
+ * move - mova a player
+ * @deltaTime: time
+ * Return: nothing
+ */
+void move(float deltaTime)
+{
+    float moveStep, newPlayerX, newPlayerY;
+
+    //deltaTime = 0.0010;
+    p.rotationAngle += p.turnDirection * p.turnSpeed * 1.10 * deltaTime;
+
+    moveStep = p.walkDirection * p.walkSpeed * deltaTime;
+
+    newPlayerX = p.x + cos(p.rotationAngle) * moveStep;
+    newPlayerY = p.y + sin(p.rotationAngle) * moveStep;
+
+    if (!mapWall(newPlayerX, newPlayerY))
+    {
+        p.x = newPlayerX;
+        p.y = newPlayerY;
+    }
 }
