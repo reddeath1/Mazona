@@ -27,12 +27,14 @@ int collisionDetect(float x, float y)
 void displayPlayer(SDL_Instance instance)
 {
     SDL_SetRenderDrawColor(instance.renderer, 255, 255, 255, 255);
+
     SDL_Rect playerRect = {
         p.x * MINIMAP_SCALE_FACTOR,
         p.y * MINIMAP_SCALE_FACTOR,
         p.width * MINIMAP_SCALE_FACTOR,
         p.height * MINIMAP_SCALE_FACTOR
     };
+
     SDL_RenderFillRect(instance.renderer, &playerRect);
 
     SDL_RenderDrawLine(
@@ -63,7 +65,7 @@ void playerConfig(SDL_Instance instance)
     /* Allocating the total amount of bytes in memory to hold the color buffer */
     colorBuffer = (Uint32*) malloc(sizeof(Uint32) * (Uint32)WIN_WIDTH * (Uint32)WIN_HEIGHT);
 
-    /* Creating an SDL_Texture to display the colorbuffer */
+    /* Creating an SDL_Texture to display the color buffer */
     colorTexture = SDL_CreateTexture(
         instance.renderer,
         SDL_PIXELFORMAT_ARGB8888,
@@ -79,7 +81,7 @@ void playerConfig(SDL_Instance instance)
     textures[3] = (Uint32 *) TEXTURE1;
     textures[4] = (Uint32 *) TEXTURE1;
     textures[5] = (Uint32 *) TEXTURE2;
-    textures[6] = (Uint32 *) TEXTURE4;
+    textures[6] = (Uint32 *) TEXTURE1;
     textures[7] = (Uint32 *) TEXTURE4;
 }
 

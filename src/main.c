@@ -43,7 +43,7 @@ int main(void)
 		return (1);
 
     /* Setting up Player */
-	playerConfig(instance);
+    playerConfig(instance);
 
 	/* Loop */
 	while ("is running")
@@ -65,9 +65,9 @@ int main(void)
 		displayColorBuffer(instance);
 		clearColorBuffer(0xFF000000);
 
+        displayPlayer(instance);
 		displayMap(instance);
         displayRays(instance);
-        displayPlayer(instance);
 
 		SDL_RenderPresent(instance.renderer);
 	}
