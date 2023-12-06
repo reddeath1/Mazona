@@ -60,7 +60,7 @@ void playerConfig(SDL_Instance instance)
     p.walkSpeed = 100;
     p.turnSpeed = 45 * (PI / 180);
 
-    /* Allocating the total amount of bytes in memory to hold the colorbuffer */
+    /* Allocating the total amount of bytes in memory to hold the color buffer */
     colorBuffer = (Uint32*) malloc(sizeof(Uint32) * (Uint32)WIN_WIDTH * (Uint32)WIN_HEIGHT);
 
     /* Creating an SDL_Texture to display the colorbuffer */
@@ -73,14 +73,14 @@ void playerConfig(SDL_Instance instance)
     );
 
     /* loading textures from the textures.h */
-    textures[0] = (Uint32 *) WOOD_TEXTURE; //REDBRICK_TEXTURE;
-    textures[1] = (Uint32 *) WOOD_TEXTURE;//PURPLESTONE_TEXTURE;
-    textures[2] = (Uint32 *) MOSSYSTONE_TEXTURE;
-    textures[3] = (Uint32 *) GRAYSTONE_TEXTURE;
-    textures[4] = (Uint32 *) WOOD_TEXTURE;//COLORSTONE_TEXTURE;
-    textures[5] = (Uint32 *) BLUESTONE_TEXTURE;
-    textures[6] = (Uint32 *) WOOD_TEXTURE;
-    textures[7] = (Uint32 *) EAGLE_TEXTURE;
+    textures[0] = (Uint32 *) TEXTURE4;
+    textures[1] = (Uint32 *) TEXTURE3;
+    textures[2] = (Uint32 *) TEXTURE4;
+    textures[3] = (Uint32 *) TEXTURE1;
+    textures[4] = (Uint32 *) TEXTURE1;
+    textures[5] = (Uint32 *) TEXTURE2;
+    textures[6] = (Uint32 *) TEXTURE4;
+    textures[7] = (Uint32 *) TEXTURE4;
 }
 
 /**
