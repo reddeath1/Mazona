@@ -7,7 +7,7 @@
 void Projection(void)
 {
     int i, y;
-    float perpDistance, distanceProjPlane, projectedWallHeight;
+    float perDistance, distanceProjPlane, projectedWallHeight;
     int wallStripHeight, wallTopPixel, wallBottomPixel;
     int textureOffsetX;
     int distanceFromTop, textureOffsetY;
@@ -17,9 +17,9 @@ void Projection(void)
 
     for (i = 0; i < RAYS; i++)
     {
-        perpDistance = rays[i].distance * cos(rays[i].rayAngle - p.rotationAngle);
+        perDistance = rays[i].distance * cos(rays[i].rayAngle - p.rotationAngle);
         distanceProjPlane = (WIN_WIDTH / 2) / tan(ANGLE / 2);
-        projectedWallHeight = (TILE_SIZE / perpDistance) * distanceProjPlane;
+        projectedWallHeight = (TILE_SIZE / perDistance) * distanceProjPlane;
 
         wallStripHeight = (int)projectedWallHeight;
 
