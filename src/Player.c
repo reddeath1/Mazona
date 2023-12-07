@@ -9,14 +9,14 @@
  */
 int collisionDetect(float x, float y)
 {
-    int mapGridIndexX, mapGridIndexY;
+    int mapGridX, mapGridY;
 
     if (x < 0 || x > WIN_WIDTH || y < 0 || y > WIN_HEIGHT) {
         return (FALSE);
     }
-    mapGridIndexX = floor(x / TILE_SIZE);
-    mapGridIndexY = floor(y / TILE_SIZE);
-    return (map[mapGridIndexY][mapGridIndexX] != 0);
+    mapGridX = floor(x / TILE_SIZE);
+    mapGridY = floor(y / TILE_SIZE);
+    return (map[mapGridY][mapGridX] != 0);
 }
 
 /**
