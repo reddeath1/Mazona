@@ -30,5 +30,7 @@ sudo apt install SDL2_ttf
 * Use right and left arrow keys to turn the camera around
 # Compilation
 * Run ```make``` to compile with ```gcc -Wall -Werror -Wextra -pedantic ./src/*.c -o mazona -lm -ldl `sdl2-config --cflags` `sdl2-config --libs` ```.
+# LICENSE
+* <a href='https://github.com/reddeath1/Mazona/blob/main/LICENSE'>``` MIT ``` </a>
 # Authors
 Frank Galos - [Linkedin](https://www.linkedin.com/in/frankgalos)    
