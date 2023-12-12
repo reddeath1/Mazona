@@ -20,7 +20,10 @@ sudo apt install SDL2_ttf
  Follow this link for installation details ```https://lazyfoo.net/tutorials/SDL/01_hello_SDL/windows/index.php```
 * THEN
  ```git clone https://github.com/reddeath1/Mazona.git```
-* 
+
+# Website
+* ```https://mazona-1395eac44eff.herokuapp.com```
+  
 # Usage
 * Execute ```./mazona``` or type ```make run``` to open the game
 * Use up and down arrow keys to move forward and back
