@@ -22,7 +22,7 @@ sudo apt install SDL2_ttf
  ```git clone https://github.com/reddeath1/Mazona.git```
 
 # Website
-* ```<a href='https://mazona-1395eac44eff.herokuapp.com'>https://mazona-1395eac44eff.herokuapp.com</a>```
+* <a href='https://mazona-1395eac44eff.herokuapp.com'>```https://mazona-1395eac44eff.herokuapp.com```</a>
   
 # Usage
 * Execute ```./mazona``` or type ```make run``` to open the game
